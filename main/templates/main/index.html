@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    <title>more</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body>
@@ -40,132 +40,21 @@
         <div class="collapse navbar-collapse" id="navbar1">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link active" href="{% url 'home' %}">O firmie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about-us">O firmie</a>
+                    <a class="nav-link" href="{% url 'contact' %}">Kontakt</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Kontakt</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="blog.html">blog</a>
+                    <a class="nav-link" href="{% url 'blog' %}">blog</a>
                 </li>
             </ul>
         </div>
     </div>
     <!--container end-->
 </nav>
-<!--Section-1-->
-<section class="section-1">
-    <div class="jumbotron d-flex align-items-center">
-        <div class="gradient"></div>
-        <div class="container-fluid content">
-            <h1 data-aos="fade-up" data-aos-delay="100">Patryk Kozioł</h1>
-            <h2 data-aos="fade-up" data-aos-delay="300">Doractwo Podatkowe</h2>
-            <h4 data-aos="fade-up" data-aos-delay="500">tel. 508 819 601</h4>
-            <p data-aos="fade-up" data-aos-delay="700"><a href="#about-us" class="btn btn-success">Dowiedz się więcej</a></p>
-        </div>
-        <!--container-fluid end-->
-    </div>
-    <section>
-        <!-- About Section Start -->
-        <div id="about-us">
-            <div class="container">
-                <h3>O Firmie</h3>
-                <div class="row" style="margin-right: 0; margin-left: 0;" data-aos="fade-up" data-aos-delay="300">
-                    <div>
-                        <img src="{% static 'images/about.jpg' %}" alt="about-bg" class="thumbnail image">
-                        <p>Patryk Kozioł prowadzi kancelarię specjalizującą się w obsłudze prawnej podmiotów gospodarczych w obszarze podatków.
-                        Zgodnie z obowiązkiem nałożonym na mnie przez ustawę o doradztwie podatkowym nieustannie podnoszę
-                        swoje kwalifikacje, biorę udział w licznych szkoleniach, seminariach i konferencjach. Ponadto
-                        jako doradca podatkowy zobowiązany jestem do postępowania w zgodzie z zasadami etyki zawodowej
-                        oraz do zachowania tajemnicy zawodowej, w tym również po zakończeniu obsługi klienta. Zapraszam
-                        do zapoznania się z ofertą.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About Section End -->
-    </section>
-</section>
+{% block content %}{% endblock %}
 
-<!--Section-2-->
-    <section class="section-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-sm-12 col-12 box-1">
-                    <div class="row box" data-aos="fade-left" data-aos-delay="300">
-                        <div class="col-sm-12">
-                            <i class="fas fa-2x fa-hands-helping" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-sm-12">
-                            <h5><a href="services.html">Doradztwo podatkowe</a></h5>
-                            <ul>
-                                <li>Deklaracje podatkowe</li>
-                                <li>Optymalizacja podatkowa</li>
-                                <li>Rozliczenia publicznoprawne</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-12 col-12 box-2">
-                    <div class="row box" data-aos="fade-left" data-aos-delay="500">
-                        <div class="col-lg-2 col-sm-12">
-                            <i class="fas fa-2x fa-child" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-sm-12">
-                            <h5><a href="services.html">Rodzaj obsługiwanych klientów</a></h5>
-                            <ul>
-                                <li>Firmy jednoosobowe</li>
-                                <li>Firmy krajowe</li>
-                                <li>Spółki cywilne</li>
-                                <li>Spółki jawne</li>
-                                <li>Spółki partnerskie</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-12 col-12 box-3">
-                    <div class="row box" data-aos="fade-left" data-aos-delay="700">
-                        <div class="col-lg-2 col-sm-12">
-                            <i class="fas fa-2x fa-info-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-sm-12">
-                            <h5><a href="services.html">Informacje dodatkowe</a></h5>
-                            <ul>
-                                <li>Firma ubezpieczona OC</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!--Section-3-->
-<section class="section-3">
-    <div class="container">
-        <div class="row m-0">
-            <div class="col-lg-5 col-md-12 p-0" data-aos="fade-right" data-aos-delay="300">
-                <h2>Świadczę usługi prawne w następującym zakresie:</h2>
-                <ul>
-                    <li><a href="services.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Reprezentowanie w sprawach podatkowych</a> </li>
-                    <li><a href="services.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Audyty podatkowe</a></li>
-                    <li><a href="services.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Interpretacje podatkowe</a></li>
-                    <li><a href="services.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Opinie prawnopodatkowe</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-7 col-md-12 p-0" data-aos="fade-left" data-aos-delay="300">
-                <figure>
-                    <img class="inner-img" src="{% static 'images/services-bg2.jpg'%}" alt="services">
-                    <img class="out-sideimg" src="{% static 'images/services-bg.jpg' %}" alt="services">
-                </figure>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section class="section-7">
     <!-- Footer -->
