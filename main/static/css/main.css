@@ -1207,8 +1207,18 @@ textarea.form-control {
 }
 
 /*=============================
-     Blog Styles
+     Blog Styless
 =============================*/
+
+.jumbotron-blog {
+    width: 100%;
+    height: 772px;
+    position: relative;
+    background-image: url(../images/building-site.jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+}
 
 .blog {
     width: 100%;
