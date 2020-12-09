@@ -130,6 +130,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
 
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '<apikey>'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 try:
     from .local_settings import *
 except ImportError:
