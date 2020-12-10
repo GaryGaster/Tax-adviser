@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 def home(request):
     return render(request, 'main/home.html')
 
+
 def contact(request):
     if request.method == 'POST':
         if request.POST.get('email', False):
@@ -26,6 +27,7 @@ def contact(request):
             )
 
     return render(request, 'main/contact.html')
+
 
 def blog(request):
     return render(request, 'main/blog.html')
