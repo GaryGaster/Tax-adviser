@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'tax_adviser.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'exampledb',
+        'NAME': 'doradcadb',
         'USER': 'postgres',
         'PASSWORD': 'example',
         'HOST': 'localhost',

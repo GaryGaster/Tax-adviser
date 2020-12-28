@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
+from django.views.generic import ListView, DetailView
+
+from .models import Post
 
 
 def home(request):
@@ -16,7 +19,7 @@ def contact(request):
             message = request.POST['message']
 
             message += '\n\n' + name + '\n' + email + '\n' + number
-            subject += ' /**\ ' + name + ' /**\ ' + email + '/**\ ' + number
+            subject += 'Imię i nazwisko: ' + name + 'mail: ' + email + 'Telefon: ' + number
 
             send_mail(
                 subject,
@@ -29,5 +32,11 @@ def contact(request):
     return render(request, 'main/contact.html')
 
 
-def blog(request):
-    return render(request, 'main/blog.html')
+class BlogView(ListView):
+    model = Post
+    template_name = 'main/blog.html'
+
+
+class BlogDetailView(DetailView):
+    model = Post
+    template_name = 'main/blog_single.html'
