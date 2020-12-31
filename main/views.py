@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.views.generic import ListView, DetailView, CreateView
 
 from .models import Post
+from .forms import PostForm
 
 
 def home(request):
@@ -43,6 +44,6 @@ class BlogDetailView(DetailView):
 
 class AddPostView(CreateView):
     model = Post
+    form_class = PostForm
     template_name = 'main/add_post.html'
-    fields = '__all__'
 
