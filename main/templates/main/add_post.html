@@ -1,0 +1,18 @@
+{% extends "main/index.html" %}
+{% load static %}
+{% block title %} PATRYK KOZIOŁ | DODAJ POST {% endblock %}
+
+{% block content %}
+
+<h1>Add POST</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">POST</button>
+</form>
+
+
+<br/><br/>
+<a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
+{% endblock %}

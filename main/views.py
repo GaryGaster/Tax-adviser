@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from .models import Post
 
@@ -40,3 +40,9 @@ class BlogView(ListView):
 class BlogDetailView(DetailView):
     model = Post
     template_name = 'main/blog_single.html'
+
+class AddPostView(CreateView):
+    model = Post
+    template_name = 'main/add_post.html'
+    fields = '__all__'
+
