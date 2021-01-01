@@ -6,7 +6,7 @@
 
 <h1>{{ post.title }}</h1>
 <p>{{ body }}</p>
-<small>{{ post.author.first_name }} {{ post.author.last_name }}</small>
+<small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date_pretty }}</small>
 
 <br/><br/>
 <a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
