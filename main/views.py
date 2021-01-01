@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
-from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
 
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, EditPostForm
 
 
 def home(request):
@@ -42,8 +44,20 @@ class BlogDetailView(DetailView):
     model = Post
     template_name = 'main/blog_single.html'
 
+
 class AddPostView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'main/add_post.html'
 
+
+class UpdatePostView(UpdateView):
+    model = Post
+    form_class = EditPostForm
+    template_name = 'main/update_post.html'
+
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'main/delete_post.html'
+    success_url = reverse_lazy('blog')

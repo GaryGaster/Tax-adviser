@@ -6,8 +6,14 @@
 <h1>POST</h1>
 <ul>
     {% for post in object_list %}
-    <li> <a href="{% url 'blog-detail' post.pk %}"> {{ post.title }} - {{ post.author }}</a>
-    {{ post.body }}</li>
+    <li> <a href="{% url 'blog-detail' post.pk %}"> {{ post.title }} -
+        {{post.author.first_name}}
+        {{post.author.last_name}}</a> -
+        <a href="{% url 'update-post' post.pk %}"><i class="far fa-edit"></i></a>
+        <a href="{% url 'delete-post' post.pk %}"><i class="fas fa-trash-alt"></i></a>
+
+        <br/>
+        {{ post.body }}</li>
     {% endfor %}
 </ul>
 
