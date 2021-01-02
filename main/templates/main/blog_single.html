@@ -5,8 +5,14 @@
 {% block content %}
 
 <h1>{{ post.title }}</h1>
-<p>{{ body }}</p>
+<p>{{ post.body }}</p>
 <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date_pretty }}</small>
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+        <a href="{% url 'update-post' post.pk %}"><i class="far fa-edit"></i></a>
+        <a href="{% url 'delete-post' post.pk %}"><i class="fas fa-trash-alt"></i></a>
+    {% endif %}
+{% endif %}
 
 <br/><br/>
 <a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>

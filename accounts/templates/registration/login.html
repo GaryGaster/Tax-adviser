@@ -1,21 +1,18 @@
 {% extends "main/index.html" %}
 {% load static %}
-{% block title %} PATRYK KOZIOŁ | DODAJ POST {% endblock %}
+{% block title %} PATRYK KOZIOŁ | ZALOGUJ SIĘ {% endblock %}
 
 {% block content %}
-{% if user.is_authenticated and user.is_superuser %}
-<h1>DODAJ POST</h1>
+
+<h1>Zaloguj się</h1>
 
 <div class="form-group">
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success">POST</button>
+        <button type="submit" class="btn btn-success">Zaloguj się</button>
     </form>
 </div>
-{% else %}
-<h1>Brak uprawnień ! ;-)</h1>
-{% endif %}
 
 
 <br/><br/>
