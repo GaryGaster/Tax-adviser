@@ -5,7 +5,7 @@ from .models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'author', 'body','snippet')
+        fields = ('title', 'author', 'body', 'snippet')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
@@ -25,7 +25,7 @@ class PostForm(forms.ModelForm):
 class EditPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'body','snippet')
+        fields = ('title', 'body', 'snippet')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),

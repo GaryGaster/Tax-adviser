@@ -1,21 +1,23 @@
 {% extends "main/index.html" %}
 {% load static %}
 {% load i18n %}
-{% block title %} PATRYK KOZIOŁ | ZAREJESTRUJ SIĘ {% endblock %}
+{% block title %} PATRYK KOZIOŁ | EDYCJA PROFILU {% endblock %}
 
 {% block content %}
 
-<h1>Zarejestruj się</h1>
+<h1>Zaktualizuj profil</h1>
+
 
 <div class="form-group">
     {% language 'pl' %}
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Zarejestruj się</button>
+        <button type="submit" class="btn btn-success">Aktualizuj</button>
     </form>
     {% endlanguage %}
 </div>
+
 
 
 <br/><br/>
