@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
 
@@ -36,3 +36,20 @@ class EditProfileForm(UserChangeForm):
         self.fields['username'].label = "Użytkownik"
         self.fields['first_name'].label = "Imię"
         self.fields['last_name'].label = "Nazwisko"
+
+
+class PasswordChangingForm(PasswordChangeForm):
+    old_password = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')
+
+
+    def __init__(self, *args, **kwargs):
+        super(PasswordChangingForm, self).__init__(*args, **kwargs)
+        self.fields['old_password'].label = "Stare hasło"
+        self.fields['new_password1'].label = "Nowe hasło"
+        self.fields['new_password2'].label = "Nowe hasło (powtórz):"
