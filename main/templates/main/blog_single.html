@@ -6,6 +6,7 @@
 
 <h1>{{ post.title }}</h1>
 <p>{{ post.body|safe }}</p>
+<img src="{{ post.image.url }}">
 <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date_pretty }}</small>
 {% if user.is_authenticated %}
     {% if user.id == post.author.id %}
