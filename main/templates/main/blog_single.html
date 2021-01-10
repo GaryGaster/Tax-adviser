@@ -6,7 +6,9 @@
 
 <h1>{{ post.title }}</h1>
 <p>{{ post.body|safe }}</p>
+{% if post.image %}
 <img src="{{ post.image.url }}">
+{% endif %}
 <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date_pretty }}</small>
 {% if user.is_authenticated %}
     {% if user.id == post.author.id %}
@@ -39,6 +41,38 @@
     {% endif %}
 
 </form>
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{ post.author.profile.profile_pic.url }}" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.author.first_name }} {{ post.author.last_name }}</h5>
+        <p class="small text-muted">
+            <a href="{% url 'show-profile-page' post.author.profile.id %}"> Profil </a>
+            {% if post.author.profile.website_url %}
+            | <a href="{{ post.author.profile.facebook_url }}"> Facebook</a>
+            {% endif %}
+            {% if post.author.profile.twitter_url %}
+            | <a href="{{ post.author.profile.twitter_url }}"> Twitter</a>
+            {% endif %}
+            {% if post.author.profile.instagram_url %}
+            | <a href="{{ post.author.profile.instagram_url }}"> Instagram</a>
+            {% endif %}
+            {% if post.author.profile.linkedin_url %}
+            | <a href="{{ post.author.profile.linkedin_url }}"> Linkedin</a>
+            {% endif %}
+            {% if post.author.profile.website_url %}
+            | <a href="{{ post.author.profile.website_url }}"> Strona</a>
+            {% endif %}
+        </p>
+        <p class="card-text">{{ post.author.profile.bio }}</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {% endblock %}

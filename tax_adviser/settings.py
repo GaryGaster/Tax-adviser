@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&7q$)#)_%0m331_a1-il55$-g+%=m*q$8(5b--jpfp4zhu*&#!'
+SECRET_KEY = '<secretkey>'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -130,7 +130,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'tax_adviser/static/')
+    os.path.join(BASE_DIR, 'main/static/')
 ]
 
 LOGIN_REDIRECT_URL = 'blog'
