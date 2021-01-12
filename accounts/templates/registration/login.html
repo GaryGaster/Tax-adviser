@@ -1,5 +1,6 @@
 {% extends "main/index.html" %}
 {% load static %}
+{% load i18n %}
 {% block title %} PATRYK KOZIOŁ | ZALOGUJ SIĘ {% endblock %}
 
 {% block content %}
@@ -7,11 +8,13 @@
 <h1>Zaloguj się</h1>
 
 <div class="form-group">
+    {% language 'pl' %}
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-success">Zaloguj się</button>
     </form>
+    {% endlanguage %}
 </div>
 
 
