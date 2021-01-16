@@ -1,0 +1,23 @@
+{% extends "main/index.html" %}
+{% load static %}
+{% block title %} PATRYK KOZIOŁ | DODAJ KOMENTARZ {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>DODAJ KOMENTARZ</h1>
+
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Dodaj</button>
+    </form>
+</div>
+{% else %}
+<h1>Brak uprawnień ! ;-)</h1>
+{% endif %}
+
+
+<br/><br/>
+<a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
+{% endblock %}

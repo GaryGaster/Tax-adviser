@@ -5,8 +5,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.http import HttpResponseRedirect
 
 
-from .models import Post
-from .forms import PostForm, EditPostForm
+from .models import Post, Comment
+from .forms import PostForm, EditPostForm, CommentForm
 
 
 def home(request):
@@ -78,6 +78,16 @@ class AddPostView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'main/add_post.html'
+
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'main/add_comment.html'
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
 
 
 class UpdatePostView(UpdateView):

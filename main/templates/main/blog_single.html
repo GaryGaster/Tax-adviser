@@ -42,6 +42,29 @@
 
 </form>
 
+<br/><br/>
+
+<h2>Komentarze... </h2>
+{% if not post.comments.all %}
+    Nie dodano jeszcze komenatrza <a href="{% url 'add-comment' post.pk %}">Dodaj komentarz</a>
+{% else %}
+    {% for comment in post.comments.all %}
+        <br/><br/>
+        <strong>
+            {{ comment.name }}
+            {{ comment.comment_date_pretty }}
+        </strong>
+        <br/>
+        {{ comment.body }}
+    {% endfor %}
+<br/><br/>
+<hr>
+<a href="{% url 'add-comment' post.pk %}">Dodaj komentarz</a>
+{% endif %}
+<hr>
+<br/><br/>
+
+
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
     <div class="col-md-4">
