@@ -5,7 +5,7 @@ from django.views import generic
 from django.views.generic import DetailView, CreateView
 from main.models import Profile
 
-from .forms import SignUpForm, EditProfileForm, PasswordChangingForm, ProfilePageForm
+from .forms import SignUpForm, EditProfileForm, PasswordChangingForm, ProfilePageForm, EditProfilePageForm
 
 
 class CreateProfilePageView(CreateView):
@@ -22,9 +22,13 @@ class CreateProfilePageView(CreateView):
 
 class EditProfilePageView(generic.UpdateView):
     model = Profile
+    form_class = EditProfilePageForm
     template_name = 'registration/edit_profile_page.html'
-    fields = ['bio', 'profile_pic', 'facebook_url', 'twitter_url', 'instagram_url', 'linkedin_url', 'website_url', ]
     success_url = reverse_lazy('blog')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class ShowProfilePageView(DetailView):

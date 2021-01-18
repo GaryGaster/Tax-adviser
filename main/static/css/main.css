@@ -93,11 +93,11 @@ header .fa {
 
 .navbar-dark .navbar-nav .active > .nav-link {
     font-weight: 600;
-    color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0) !important;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #6d6d6d;
+    color: #6d6d6d !important;
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
@@ -222,6 +222,17 @@ header .fa {
     text-align: center;
 }
 
+
+/*===================
+     main card
+====================*/
+
+.main-card {
+    width: 80%;
+    padding: 5%;
+    margin-bottom: 100px;
+
+}
 
 /*=============================
      section-2 Styles

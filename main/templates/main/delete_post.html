@@ -4,23 +4,24 @@
 
 {% block content %}
 
-<h1>USUŃ POST</h1>
-<br/><br/>
+<div class="main-card">
+    <br/><br/>
+    {% if user.is_authenticated and user.is_superuser %}
+    <h3>Usuń: {{ post.title }}</h3>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            <strong>Czy na pewno chcesz usunąć post?</strong><br/><br/>
+            <button type="submit" class="btn btn-danger">Tak</button>
+        </form>
+    </div>
+    {% else %}
+    <h1>Brak uprawnień ! ;-)</h1>
+    {% endif %}
 
-{% if user.is_authenticated and user.is_superuser %}
-<h3>Usuń: {{ post.title }}</h3>
-<div class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        <strong>Czy na pewno chcesz usunąć post?</strong><br/><br/>
-        <button type="submit" class="btn btn-danger">Tak</button>
-    </form>
+
+    <br/><br/>
+    <a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
+
 </div>
-{% else %}
-<h1>Brak uprawnień ! ;-)</h1>
-{% endif %}
-
-
-<br/><br/>
-<a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
 {% endblock %}

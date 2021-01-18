@@ -4,23 +4,18 @@
 {% block title %} PATRYK KOZIOŁ | EDYCJA PROFILU {% endblock %}
 
 {% block content %}
-
-<h1>Zaktualizuj profil</h1>
-
-{{ user.profile.bio }}
-
-<div class="form-group">
-    {% language 'pl' %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Aktualizuj</button>
-    </form>
-    {% endlanguage %}
+<div class="main-card">
+    <h1>Zaktualizuj profil</h1>
+    <div class="form-group">
+        {% language 'pl' %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Aktualizuj</button>
+        </form>
+        {% endlanguage %}
+    </div>
+    <br/><br/>
+    <a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
 </div>
-
-
-
-<br/><br/>
-<a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
 {% endblock %}

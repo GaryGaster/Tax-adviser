@@ -1,23 +1,35 @@
 {% extends "main/index.html" %}
 {% load static %}
-{% load i18n %}
 {% block title %} PATRYK KOZIOŁ | ZAREJESTRUJ SIĘ {% endblock %}
 
 {% block content %}
-
-<h1>Zarejestruj się</h1>
-
-<div class="form-group">
-    {% language 'pl' %}
+<div class="main-card">
+    <h1>Zarejestruj się</h1>
+    <br/>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Użytkownik">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="first_name" placeholder="Imię (opcjonalnie)">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="last_name" placeholder="Nazwisko (opcjonalnie)">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password1" placeholder="Hasło">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password2" placeholder="Potwierdzenie hasła">
+        </div>
+
         <button type="submit" class="btn btn-success">Zarejestruj się</button>
     </form>
-    {% endlanguage %}
+    <br/>
+    <small class="form-text text-muted">Masz już konto? <a href="{% url 'login' %}"> Zaloguj się</a></small>
 </div>
-
-
-<br/><br/>
-<a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
 {% endblock %}

@@ -1,23 +1,25 @@
 {% extends "main/index.html" %}
 {% load static %}
-{% load i18n %}
 {% block title %} PATRYK KOZIOŁ | ZALOGUJ SIĘ {% endblock %}
 
 {% block content %}
 
-<h1>Zaloguj się</h1>
 
-<div class="form-group">
-    {% language 'pl' %}
+<div class="main-card">
+    <h1>Zaloguj się</h1>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Zaloguj się</button>
+        <div class="form-group">
+            <br/>
+            <input type="text" class="form-control" name="username" placeholder="Użytkownik">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Hasło">
+            <br/>
+            <button type="submit" class="btn btn-success">Zaloguj się</button>
+        </div>
     </form>
-    {% endlanguage %}
+    <small class="form-text text-muted">Nie masz konta? <a href="{% url 'register' %}"> Zarejestruj się</a></small>
+    <br/>
 </div>
-
-
-<br/><br/>
-<a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
 {% endblock %}
