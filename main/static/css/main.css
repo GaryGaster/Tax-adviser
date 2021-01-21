@@ -224,15 +224,19 @@ header .fa {
 
 
 /*===================
-     main card
+      Cards
 ====================*/
 
 .main-card {
     width: 80%;
     padding: 5%;
-    margin-bottom: 100px;
-
 }
+
+.profile-card {
+    width: 100%;
+    padding: 5%;
+}
+
 
 /*=============================
      section-2 Styles
@@ -643,10 +647,18 @@ textarea.form-control {
     width: 100%;
     height: 250px;
     position: relative;
-    background-image: url(../images/building-site.jpg);
+    background-image: url(../images/index.jpg);
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
+}
+
+.jumbotron-blog h1 {
+    color: #ffffff;
+}
+
+.jumbotron-blog h2 {
+    color: #ffffff;
 }
 
 .blog {
@@ -655,6 +667,12 @@ textarea.form-control {
     padding-top: 30px;
     padding-bottom: 100px;
     border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-card {
+    width: 80%;
+    padding: 5%;
+    border: none;
 }
 
 .blog h3 {
@@ -711,14 +729,6 @@ textarea.form-control {
     padding-bottom: 10px;
 }
 
-.blog h5 {
-    font-size: 16px;
-    font-weight: 300;
-    padding-bottom: 30px;
-    padding-right: 40px;
-    line-height: 25px;
-}
-
 .blog .bt {
     padding-top: 50px;
 }
@@ -753,6 +763,7 @@ textarea.form-control {
     background-color: #b4dc2d;
     border-color: #b4dc2d;
     border-radius: 100px;
+    float: right;
 }
 
 .blog .btn-success:hover {
@@ -1097,6 +1108,12 @@ textarea.form-control {
         padding-top: 1rem !important;
     }
 
+    .blog-card {
+        width: 100%;
+        padding: 5%;
+        border: none;
+    }
+
     .blog h3 {
         font-size: 32px;
         line-height: 40px;
@@ -1122,10 +1139,7 @@ textarea.form-control {
         font-size: 14px;
         line-height: 25px;
     }
-    .blog h5 {
-        font-size: 14px;
-        padding-bottom: 10px;
-    }
+
     .blog .btn-success {
         font-size: 14px;
         padding: 5px 18px;
@@ -1231,6 +1245,12 @@ textarea.form-control {
         line-height: 40px;
         margin-top: 0;
     }
+
+    .blog-card {
+        width: 100%;
+        padding: 5%;
+        border: none;
+
     .blog h3 {
         font-size: 25px;
         line-height: 35px;
@@ -1391,6 +1411,12 @@ textarea.form-control {
         width: 100%;
         object-fit: cover;
     }
+
+    .blog-card {
+        width: 100%;
+        padding: 5%;
+        border: none;
+
     .blog .heading .btn-success {
         margin-bottom: 20px;
     }
@@ -1426,10 +1452,7 @@ textarea.form-control {
         font-size: 18px;
         padding-bottom: 0;
     }
-    .blog h5 {
-        font-size: 12px;
-        font-weight: 400;
-    }
+
     .blog figure figcaption p {
         font-size: 12px;
         font-weight: 400;

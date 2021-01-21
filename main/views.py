@@ -4,7 +4,6 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 
-
 from .models import Post, Comment
 from .forms import PostForm, EditPostForm, CommentForm
 
@@ -51,12 +50,12 @@ def LikeView(request, pk):
 class BlogView(ListView):
     model = Post
     template_name = 'main/blog.html'
+    ordering = ['-id']
 
 
 class BlogDetailView(DetailView):
     model = Post
     template_name = 'main/blog_single.html'
-
 
     def get_context_data(self, *args, **kwargs):
         context = super(BlogDetailView, self).get_context_data(*args, **kwargs)

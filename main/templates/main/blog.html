@@ -3,22 +3,45 @@
 {% block title %} PATRYK KOZIOŁ | BLOG {% endblock %}
 
 {% block content %}
-<h1>POST</h1>
-<ul>
-    {% for post in object_list %}
-    <li> <a href="{% url 'blog-detail' post.pk %}"> {{ post.title }} -
-        {{post.author.first_name}}
-        {{post.author.last_name}}</a>
-        {% if user.is_authenticated %}
-            {% if user.id == post.author.id %}
+<!--Section-1-->
+<section class="section-1">
+    <div class="jumbotron-blog d-flex align-items-center">
+        <div class="gradient"></div>
+        <div class="container-fluid content">
+            <h1 data-aos="fade-right" data-aos-delay="300">Blog</h1>
+            <h2 data-aos="fade-left" data-aos-delay="300">Patryk Kozioł</h2>
+        </div>
+        <!--container-fluid end-->
+    </div>
+</section>
+
+<section class="container">
+    <div class="card mb-3 blog blog-card">
+        {% for post in object_list %}
+        {% if post.image %}
+        <a href="{% url 'blog-detail' post.pk %}"><img src="{{ post.image.url }}" class="card-img-top" alt="..."></a>
+        {% else %}
+        <p> Wstaw zdjęcie</p>
+        {% endif %}
+        <div class="card-body">
+            <a href="{% url 'blog-detail' post.pk %}"><h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text"><small class="text-muted">Opublikowano {{ post.post_date_pretty }}
+                    przez {{ post.author.first_name }} {{ post.author.last_name }}</small></p></a>
+            <br/>
+            <p class="card-text">{{ post.snippet }}</p>
+            <div>
+                <a href="{% url 'blog-detail' post.pk %}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Czytaj dalej</a>
+                {% if user.is_authenticated and user.id == post.author.id %}
                 <a href="{% url 'update-post' post.pk %}"><i class="far fa-edit"></i></a>
                 <a href="{% url 'delete-post' post.pk %}"><i class="fas fa-trash-alt"></i></a>
-            {% endif %}
-        {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+</section>
 
-        <br/>
-        {{ post.snippet }}</li>
-    {% endfor %}
-</ul>
+
 
 {% endblock %}
