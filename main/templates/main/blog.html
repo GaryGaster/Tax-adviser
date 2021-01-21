@@ -17,6 +17,24 @@
 
 <section class="container">
     <div class="card mb-3 blog blog-card">
+        <div class="row bt">
+            <div class="col-sm-12">
+                <div class="pagination" style="margin-bottom: 3%;">
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <ul>
+                        <li><a class="active" href="?page={{ num }}">{{ num }}</a></li>
+                    </ul>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <ul>
+                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    </ul>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
         {% for post in object_list %}
         {% if post.image %}
         <a href="{% url 'blog-detail' post.pk %}"><img src="{{ post.image.url }}" class="card-img-top" alt="..."></a>
@@ -39,9 +57,23 @@
         </div>
         <hr>
         {% endfor %}
-    </div>
+        <div class="row bt">
+            <div class="col-sm-12">
+                <div class="pagination" style="margin-bottom: 3%;">
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <ul>
+                        <li><a class="active" href="?page={{ num }}">{{ num }}</a></li>
+                    </ul>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <ul>
+                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    </ul>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
 </section>
-
-
-
 {% endblock %}

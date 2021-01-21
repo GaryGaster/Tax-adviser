@@ -51,6 +51,7 @@ class BlogView(ListView):
     model = Post
     template_name = 'main/blog.html'
     ordering = ['-id']
+    paginate_by = 5
 
 
 class BlogDetailView(DetailView):
