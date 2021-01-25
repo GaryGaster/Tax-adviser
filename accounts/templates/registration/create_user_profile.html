@@ -5,7 +5,7 @@
 {% block content %}
 <div class="main-card">
     {% if user.is_authenticated %}
-    <h1>UTWÓRZ PROFIL</h1>
+    <legend class="border-bottom mb-4">Utwórz profil</legend>
     <div class="form-group">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}

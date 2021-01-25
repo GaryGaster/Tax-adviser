@@ -4,98 +4,86 @@
 
 {% block content %}
 
-<h1>{{ post.title }}</h1>
-<p>{{ post.body|safe }}</p>
-{% if post.image %}
-<img src="{{ post.image.url }}">
-{% endif %}
-<small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date_pretty }}</small>
-{% if user.is_authenticated %}
-    {% if user.id == post.author.id %}
-        <a href="{% url 'update-post' post.pk %}"><i class="far fa-edit"></i></a>
-        <a href="{% url 'delete-post' post.pk %}"><i class="fas fa-trash-alt"></i></a>
-    {% endif %}
-{% endif %}
+<section class="section-1">
+    <div class="jumbotron-blog d-flex align-items-center">
+        <div class="gradient"></div>
+        <div class="container-fluid content">
+            <h1 data-aos="fade-right" data-aos-delay="300">Blog</h1>
+            <h2 data-aos="fade-left" data-aos-delay="300">Patryk Kozioł</h2>
+        </div>
+        <!--container-fluid end-->
+    </div>
+</section>
 
-<br/><br/>
-<a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
+<!-- blog-single Section Start -->
+<div id="blog-single">
+    <div class="container">
+        <div class="row" data-aos="fade-up" data-aos-duration="700">
+            <div class="col-sm-12">
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-thumbnail image">
+                {% endif %}
+                <div class="heading">
+                    <small>Opublikowano {{ post.post_date_pretty }} przez {{ post.author.first_name }}
+                        {{ post.author.last_name }}</small>
+                    {% if user.is_authenticated and user.id == post.author.id %}
+                    <a href="{% url 'update-post' post.pk %}"><i class="far fa-edit"></i></a>
+                    <a href="{% url 'delete-post' post.pk %}"><i class="fas fa-trash-alt"></i></a>
+                    {% endif %}
+                    <h2>{{ post.title }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row" data-aos="fade-up" data-aos-duration="700">
+            <div class="col-sm-12 col-lg-12 box">
+                <p>{{ post.body|safe }}</p>
+            </div>
+        </div>
 
-<br/><br/>
-<hr>
-<br/>
-<form action="{% url 'like-post' post.pk %}"
-      method="POST">
-    {% csrf_token %}
-    {% if user.is_authenticated %}
-        {% if liked %}
-            <button type="submit" name="post_id" value="{{ post.id }}" class="btn">
+        <div data-aos="fade-right" data-aos-delay="300">
+            <form action="{% url 'like-post' post.pk %}"
+                  method="POST">
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                {% if liked %}
+                <button type="submit" name="post_id" value="{{ post.id }}" class="btn">
+                    <i class="fas fa-heart"> {{ total_likes }}</i>
+                </button>
+                {% else %}
+                <button type="submit" name="post_id" value="{{ post.id }}" class="btn">
+                    <i class="fas fa-heart"> {{ total_likes }}</i>
+                </button>
+                {% endif %}
+                {% else %}
                 <i class="fas fa-heart"> {{ total_likes }}</i>
-            </button>
-        {% else %}
-        <button type="submit" name="post_id" value="{{ post.id }}" class="btn">
-            <i class="fas fa-heart"> {{ total_likes }}</i>
-        </button>
-        {% endif %}
-    {% else %}
-        <i class="fas fa-heart"> {{ total_likes }}</i>
-    {% endif %}
-
-</form>
-
-<br/><br/>
-
-<h2>Komentarze... </h2>
-{% if not post.comments.all %}
-    Nie dodano jeszcze komenatrza <a href="{% url 'add-comment' post.pk %}">Dodaj komentarz</a>
-{% else %}
-    {% for comment in post.comments.all %}
-        <br/><br/>
-        <strong>
-            {{ comment.name }}
-            {{ comment.comment_date_pretty }}
-        </strong>
+                {% endif %}
+            </form>
+        </div>
         <br/>
-        {{ comment.body }}
-    {% endfor %}
-<br/><br/>
-<hr>
-<a href="{% url 'add-comment' post.pk %}">Dodaj komentarz</a>
-{% endif %}
-<hr>
-<br/><br/>
+        <a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
+        <hr>
+        <br/>
 
-
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="{{ post.author.profile.profile_pic.url }}" class="card-img" alt="...">
+        <div data-aos="fade-left" data-aos-delay="500">
+            <legend class="border-bottom mb-4">Komentarze...</legend>
+            {% if not post.comments.all %}
+            Nie dodano jeszcze komenatrza <a href="{% url 'add-comment' post.pk %}">Dodaj komentarz</a>
+            {% else %}
+            {% for comment in post.comments.all %}
+            <br/><br/>
+            <strong>
+                {{ comment.name }}
+                {{ comment.comment_date_pretty }}
+            </strong>
+            <br/>
+            {{ comment.body }}
+            {% endfor %}
+            <br/><br/>
+            <hr>
+            <a href="{% url 'add-comment' post.pk %}">Dodaj komentarz</a>
+            {% endif %}
+        </div>
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ post.author.first_name }} {{ post.author.last_name }}</h5>
-        <p class="small text-muted">
-            <a href="{% url 'show-profile-page' post.author.profile.id %}"> Profil </a>
-            {% if post.author.profile.website_url %}
-            | <a href="{{ post.author.profile.facebook_url }}"> Facebook</a>
-            {% endif %}
-            {% if post.author.profile.twitter_url %}
-            | <a href="{{ post.author.profile.twitter_url }}"> Twitter</a>
-            {% endif %}
-            {% if post.author.profile.instagram_url %}
-            | <a href="{{ post.author.profile.instagram_url }}"> Instagram</a>
-            {% endif %}
-            {% if post.author.profile.linkedin_url %}
-            | <a href="{{ post.author.profile.linkedin_url }}"> Linkedin</a>
-            {% endif %}
-            {% if post.author.profile.website_url %}
-            | <a href="{{ post.author.profile.website_url }}"> Strona</a>
-            {% endif %}
-        </p>
-        <p class="card-text">{{ post.author.profile.bio }}</p>
-      </div>
-    </div>
-  </div>
 </div>
-
-
+<!-- Blog_single Section End -->
 {% endblock %}

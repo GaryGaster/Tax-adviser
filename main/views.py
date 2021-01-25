@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -59,7 +60,7 @@ class BlogDetailView(DetailView):
     template_name = 'main/blog_single.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(BlogDetailView, self).get_context_data(*args, **kwargs)
+        context = super(BlogDetailView, self).get_context_data(**kwargs)
 
         stuff = get_object_or_404(Post, id=self.kwargs['pk'])
         total_likes = stuff.total_likes()
@@ -80,7 +81,7 @@ class AddPostView(CreateView):
     template_name = 'main/add_post.html'
 
 
-class AddCommentView(CreateView):
+class AddCommentView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
     template_name = 'main/add_comment.html'

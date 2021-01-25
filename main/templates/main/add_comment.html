@@ -4,20 +4,21 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1>DODAJ KOMENTARZ</h1>
+<div class="main-card">
+    <legend class="border-bottom mb-4">Dodaj komentarz</legend>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Dodaj</button>
+        </form>
+    </div>
+    {% else %}
+    <h1>Brak uprawnień ! ;-)</h1>
+    {% endif %}
 
-<div class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Dodaj</button>
-    </form>
+
+    <br/><br/>
+    <a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
 </div>
-{% else %}
-<h1>Brak uprawnień ! ;-)</h1>
-{% endif %}
-
-
-<br/><br/>
-<a href="{% url 'blog' %}"><button type="button" class="btn btn-secondary">Cofnij</button></a>
 {% endblock %}

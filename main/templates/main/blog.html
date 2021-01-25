@@ -15,7 +15,7 @@
     </div>
 </section>
 
-<section class="container">
+<section class="container" data-aos="fade-up" data-aos-duration="700">
     <div class="card mb-3 blog blog-card">
         <div class="row bt">
             <div class="col-sm-12">
@@ -32,7 +32,6 @@
                     {% endif %}
                     {% endfor %}
                 </div>
-
             </div>
         </div>
         {% for post in object_list %}
@@ -72,8 +71,8 @@
                     {% endif %}
                     {% endfor %}
                 </div>
-
             </div>
         </div>
+    </div>
 </section>
 {% endblock %}

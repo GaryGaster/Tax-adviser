@@ -6,7 +6,7 @@
 {% if user.is_authenticated and user.is_superuser %}
 
 <div class="main-card">
-    <h1>DODAJ POST</h1>
+    <legend class="border-bottom mb-4">Dodaj post</legend>
     <div class="form-group">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}

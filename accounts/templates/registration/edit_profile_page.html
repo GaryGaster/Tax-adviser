@@ -5,7 +5,7 @@
 {% block content %}
 <div class="main-card">
     {% if user.is_authenticated and user.id == profile.user.id %}
-    <h1>EDYCJA PROFILU</h1>
+    <legend class="border-bottom mb-4">Edycja profilu</legend>
     <div class="form-group">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
