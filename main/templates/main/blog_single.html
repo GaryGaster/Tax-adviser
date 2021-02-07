@@ -1,5 +1,6 @@
 {% extends "main/index.html" %}
 {% load static %}
+{% load i18n %}
 {% block title %} PATRYK KOZIOŁ | BLOG {% endblock %}
 
 {% block content %}
@@ -64,24 +65,28 @@
         <hr>
         <br/>
 
+        {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <input type="submit" value="Submit" class="btn btn-outline-success">
+        </form>
+        {% else %}
+        <p>Aby dodać komentarz</p><a href="{% url 'login' %}">Zaloguj się</a>
+        {% endif %}
+        <br/><br/>
         <div data-aos="fade-left" data-aos-delay="500">
-            <legend class="border-bottom mb-4">Komentarze...</legend>
-            {% if not post.comments.all %}
-            Nie dodano jeszcze komenatrza <a href="{% url 'add-comment' post.pk %}">Dodaj komentarz</a>
-            {% else %}
+            {% language 'pl' %}
+            <legend class="border-bottom mb-4">Komentarze</legend>
             {% for comment in post.comments.all %}
-            <br/><br/>
-            <strong>
-                {{ comment.name }}
-                {{ comment.comment_date_pretty }}
-            </strong>
+            <blockquote class="blockquote">
+                <p class="mb-0">{{ comment.body }}</p>
+                <footer class="blockquote-footer">{{ comment.user.username }} <cite title="Source Title">
+                    {{ comment.timestamp|timesince }} temu</cite></footer>
+            </blockquote>
             <br/>
-            {{ comment.body }}
             {% endfor %}
-            <br/><br/>
-            <hr>
-            <a href="{% url 'add-comment' post.pk %}">Dodaj komentarz</a>
-            {% endif %}
+            {% endlanguage %}
         </div>
     </div>
 </div>

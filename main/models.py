@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 from ckeditor.fields import RichTextField
-from datetime import timedelta
 
 
 class Profile(models.Model):
@@ -28,7 +27,7 @@ class Post(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
-    post_date = models.DateField(auto_now_add=True)
+    timestamp = models.DateField(auto_now_add=True)
     snippet = models.CharField(max_length=555, default="")
     likes = models.ManyToManyField(User, related_name='blog_posts')
 
@@ -39,24 +38,23 @@ class Post(models.Model):
         return self.title + ' | ' + str(self.author)
 
     def post_date_pretty(self):
-        return self.post_date.strftime("%Y-%m-%d")
+        return self.timestamp.strftime("%Y-%m-%d")
 
     def get_absolute_url(self):
         return reverse('blog-detail', args=[str(self.id)])
 
 
 class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
     body = models.TextField()
-    date_added = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-timestamp']
 
     def __str__(self):
-        return '%s - %s' % (self.post.title, self.name)
-
-    def comment_date_pretty(self):
-        self.date_added += timedelta(hours=1)
-        return self.date_added.strftime("%x %X")
+        return '{} - {}'.format(self.post.title, self.user.username)
 
     def get_absolute_url(self):
         return reverse('blog-detail', args=[str(self.post.id)])

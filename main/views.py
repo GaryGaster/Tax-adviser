@@ -1,12 +1,12 @@
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
-from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from .models import Post, Comment
 from .forms import PostForm, EditPostForm, CommentForm
+from .models import Post, Comment
 
 
 def home(request):
@@ -36,16 +36,38 @@ def contact(request):
     return render(request, 'main/contact.html')
 
 
-def LikeView(request, pk):
+def like_view(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    liked = False
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
-        liked = False
     else:
         post.likes.add(request.user)
-        liked = True
     return HttpResponseRedirect(reverse('blog-detail', args=[str(pk)]))
+
+
+def blog_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    comments = Comment.objects.all()
+    total_likes = post.total_likes()
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+        if comment_form.is_valid():
+            body = request.POST.get('body')
+            comment = Comment.objects.create(post=post, user=request.user, body=body)
+            comment.save()
+            return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        comment_form = CommentForm()
+
+    context = {
+        'post': post,
+        'comments': comments,
+        'comment_form': comment_form,
+        'total_likes': total_likes
+    }
+
+    return render(request, 'main/blog_single.html', context)
 
 
 class BlogView(ListView):
@@ -53,26 +75,6 @@ class BlogView(ListView):
     template_name = 'main/blog.html'
     ordering = ['-id']
     paginate_by = 5
-
-
-class BlogDetailView(DetailView):
-    model = Post
-    template_name = 'main/blog_single.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(BlogDetailView, self).get_context_data(**kwargs)
-
-        stuff = get_object_or_404(Post, id=self.kwargs['pk'])
-        total_likes = stuff.total_likes()
-
-        liked = False
-        if stuff.likes.filter(id=self.request.user.id).exists():
-            liked = True
-
-        context['total_likes'] = total_likes
-        context['liked'] = liked
-
-        return context
 
 
 class AddPostView(CreateView):
