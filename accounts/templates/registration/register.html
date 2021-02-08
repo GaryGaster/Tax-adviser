@@ -1,6 +1,7 @@
 {% extends "main/index.html" %}
 {% load i18n %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %} PATRYK KOZIOŁ | ZAREJESTRUJ SIĘ {% endblock %}
 
 {% block content %}
@@ -9,8 +10,9 @@
         {% language 'pl' %}
         <form method="POST">
             {% csrf_token %}
+            {{ form|crispy }}
             <div class="form-group">
-                    {{ form.as_p }}
+
             </div>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Zarejestuj się</button>

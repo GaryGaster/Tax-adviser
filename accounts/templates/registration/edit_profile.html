@@ -1,6 +1,7 @@
 {% extends "main/index.html" %}
 {% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 {% block title %} PATRYK KOZIOŁ | EDYCJA PROFILU {% endblock %}
 
 {% block content %}
@@ -10,7 +11,7 @@
         {% language 'pl' %}
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|crispy }}
             <button type="submit" class="btn btn-success">Aktualizuj</button>
         </form>
         {% endlanguage %}

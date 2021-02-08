@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -81,16 +80,6 @@ class AddPostView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'main/add_post.html'
-
-
-class AddCommentView(LoginRequiredMixin, CreateView):
-    model = Comment
-    form_class = CommentForm
-    template_name = 'main/add_comment.html'
-
-    def form_valid(self, form):
-        form.instance.post_id = self.kwargs['pk']
-        return super().form_valid(form)
 
 
 class UpdatePostView(UpdateView):

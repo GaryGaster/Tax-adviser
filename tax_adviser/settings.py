@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'main',
     'accounts',
     'ckeditor',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,5 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
